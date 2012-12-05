@@ -1,5 +1,11 @@
-local prompt_line1="$(echo $PROMPT | tr "\n" "," | cut -d, -f1)"
-local prompt_line2="$(echo $PROMPT | tr "\n" "," | cut -d, -f2)"
+function cut_prompt_line() {
+  echo $PROMPT | tr "\n" "," | cut -d, -f$1
+}
+
+function java_version() {
+  "%{$fg[magenta]%}% {$(java -version 2>&1 | grep "java version" | awk '{print $3}' | tr -d \")}"
+}
+
 local java_version="%{$fg[magenta]%}% {$(java -version 2>&1 | grep "java version" | awk '{print $3}' | tr -d \")}"
-PROMPT="${prompt_line1}${java_version}
-${prompt_line2}"
+PROMPT="$(cut_prompt_line 1)${java_version}
+$(cut_prompt_line 2)"
