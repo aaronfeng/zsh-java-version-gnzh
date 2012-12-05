@@ -1,0 +1,5 @@
+local prompt_line1="$(echo $PROMPT | tr "\n" "," | cut -d, -f1)"
+local prompt_line2="$(echo $PROMPT | tr "\n" "," | cut -d, -f2)"
+local java_version="%{$fg[magenta]%}% {$(java -version 2>&1 | grep "java version" | awk '{print $3}' | tr -d \")}"
+PROMPT="${prompt_line1} ${java_version}
+${prompt_line2}"
