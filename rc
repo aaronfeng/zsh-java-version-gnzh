@@ -3,9 +3,9 @@ function cut_prompt_line() {
 }
 
 function java_version() {
-  "%{$fg[magenta]%}% {$(java -version 2>&1 | grep "java version" | awk '{print $3}' | tr -d \")}"
+  echo "%{$fg[magenta]%}% {$(java -version 2>&1 | grep "java version" | awk '{print $3}' | tr -d \")}"
 }
 
 local java_version="%{$fg[magenta]%}% {$(java -version 2>&1 | grep "java version" | awk '{print $3}' | tr -d \")}"
-PROMPT="$(cut_prompt_line 1)${java_version}
+PROMPT="$(cut_prompt_line 1)\$(java_version)
 $(cut_prompt_line 2)"
